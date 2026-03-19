@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto - Wuero-Motos</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <h1>Wuero<span>-Motos</span></h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a href="galeria.html">Galería</a>
+      <a href="contacto.html" class="active">Contacto</a>
+    </nav>
+  </header>
+
+  <!-- TÍTULO DE PÁGINA -->
+  <div class="page-title">
+    <h2>Contacto</h2>
+    <p>Estamos listos para atenderte</p>
+  </div>
+
+  <!-- CONTACTO CONTENIDO -->
+  <section class="seccion contacto-layout">
+
+    <!-- INFO DE CONTACTO -->
+    <div class="contacto-info">
+      <h2>Encuéntranos</h2>
+
+      <div class="contacto-item">
+        <span class="contacto-icono">📞</span>
+        <div>
+          <h4>Teléfono</h4>
+          <p>831 130 60 63</p>
+        </div>
+      </div>
+
+      <div class="contacto-item">
+        <span class="contacto-icono">✉️</span>
+        <div>
+          <h4>Correo</h4>
+          <p>dgh26112005@Wuero-Motos.com</p>
+        </div>
+      </div>
+
+      <div class="contacto-item">
+        <span class="contacto-icono">🕒</span>
+        <div>
+          <h4>Horario</h4>
+          <p>Lun - Sáb: 9:00 am a 7:00 pm</p>
+          <p>Domingo: Cerrado</p>
+        </div>
+      </div>
+
+      <div class="contacto-item">
+        <span class="contacto-icono">📍</span>
+        <div>
+          <h4>Ubicación</h4>
+          <p>Loma Alta, Tamaulipas</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORMULARIO -->
+    <div class="contacto-form">
+      <h2>Envíanos un mensaje</h2>
+
+      <div class="form-grupo">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" placeholder="Tu nombre completo">
+      </div>
+
+      <div class="form-grupo">
+        <label for="telefono">Teléfono</label>
+        <input type="tel" id="telefono" placeholder="Tu número de teléfono">
+      </div>
+
+      <div class="form-grupo">
+        <label for="email">Correo</label>
+        <input type="email" id="email" placeholder="tu@correo.com">
+      </div>
+
+      <div class="form-grupo">
+        <label for="servicio">Servicio de interés</label>
+        <select id="servicio">
+          <option value="">Selecciona un servicio</option>
+          <option value="alineacion">Alineación</option>
+          <option value="mantenimiento">Mantenimiento</option>
+          <option value="reparacion">Reparación</option>
+          <option value="rendimiento">Ajuste de rendimiento</option>
+          <option value="otro">Otro</option>
+        </select>
+      </div>
+
+      <div class="form-grupo">
+        <label for="mensaje">Mensaje</label>
+        <textarea id="mensaje" rows="4" placeholder="Cuéntanos qué necesita tu moto..."></textarea>
+      </div>
+
+      <!-- Mensaje de confirmación (oculto por defecto) -->
+      <p id="msg-exito" style="display:none; color:#00cc44; font-weight:bold; letter-spacing:0.05em; margin-bottom:1rem;">
+        ✅ ¡Mensaje enviado! Nos pondremos en contacto pronto.
+      </p>
+
+      <button class="btn-enviar" onclick="enviarFormulario()">Enviar Mensaje</button>
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Wuero-Motos | Taller & Performance</p>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    function enviarFormulario() {
+      // Limpiar todos los campos
+      document.getElementById('nombre').value = '';
+      document.getElementById('telefono').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('servicio').value = '';
+      document.getElementById('mensaje').value = '';
+
+      // Mostrar mensaje de éxito
+      const msg = document.getElementById('msg-exito');
+      msg.style.display = 'block';
+
+      // Ocultar el mensaje después de 4 segundos
+      setTimeout(function() {
+        msg.style.display = 'none';
+      }, 4000);
+    }
+  </script>
+
+</body>
+</html>
