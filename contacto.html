@@ -91,11 +91,11 @@
         <label for="servicio">Servicio de interés</label>
         <select id="servicio">
           <option value="">Selecciona un servicio</option>
-          <option value="alineacion">Alineación</option>
-          <option value="mantenimiento">Mantenimiento</option>
-          <option value="reparacion">Reparación</option>
-          <option value="rendimiento">Ajuste de rendimiento</option>
-          <option value="otro">Otro</option>
+          <option value="Alineación">Alineación</option>
+          <option value="Mantenimiento">Mantenimiento</option>
+          <option value="Reparación">Reparación</option>
+          <option value="Ajuste de rendimiento">Ajuste de rendimiento</option>
+          <option value="Otro">Otro</option>
         </select>
       </div>
 
@@ -104,9 +104,8 @@
         <textarea id="mensaje" rows="4" placeholder="Cuéntanos qué necesita tu moto..."></textarea>
       </div>
 
-      <!-- Mensaje de confirmación (oculto por defecto) -->
       <p id="msg-exito" style="display:none; color:#00cc44; font-weight:bold; letter-spacing:0.05em; margin-bottom:1rem;">
-        ✅ ¡Mensaje enviado! Nos pondremos en contacto pronto.
+        ✅ ¡Abriendo WhatsApp...!
       </p>
 
       <button class="btn-enviar" onclick="enviarFormulario()">Enviar Mensaje</button>
@@ -119,7 +118,6 @@
     <p>© 2026 Wuero-Motos | Taller & Performance</p>
   </footer>
 
-  <!-- SCRIPT -->
   <script>
     function enviarFormulario() {
       const nombre   = document.getElementById('nombre').value.trim();
@@ -128,54 +126,38 @@
       const servicio = document.getElementById('servicio').value;
       const mensaje  = document.getElementById('mensaje').value.trim();
 
-      // --- VALIDACIONES ---
-      if (!nombre) {
-        alert('⚠️ Por favor ingresa tu nombre.');
-        return;
-      }
-      if (!telefono || !/^\d{7,15}$/.test(telefono.replace(/\s|-/g, ''))) {
-        alert('⚠️ Ingresa un número de teléfono válido (solo dígitos, 7-15 caracteres).');
-        return;
-      }
-      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        alert('⚠️ Ingresa un correo electrónico válido.');
-        return;
-      }
-      if (!servicio) {
-        alert('⚠️ Selecciona el servicio de tu interés.');
-        return;
-      }
-      if (!mensaje) {
-        alert('⚠️ Escribe un mensaje antes de enviar.');
-        return;
-      }
+      if (!nombre)   { alert('⚠️ Por favor ingresa tu nombre.'); return; }
+      if (!telefono || !/^\d{7,15}$/.test(telefono.replace(/[\s\-]/g, ''))) { alert('⚠️ Ingresa un número de teléfono válido.'); return; }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('⚠️ Ingresa un correo electrónico válido.'); return; }
+      if (!servicio) { alert('⚠️ Selecciona el servicio de tu interés.'); return; }
+      if (!mensaje)  { alert('⚠️ Escribe un mensaje antes de enviar.'); return; }
 
-      // --- ARMAR MENSAJE DE WHATSAPP ---
-      const texto = `🏍️ *Nuevo mensaje desde Wuero-Motos*\n\n` +
-                    `👤 *Nombre:* ${nombre}\n` +
-                    `📞 *Teléfono:* ${telefono}\n` +
-                    `✉️ *Correo:* ${email}\n` +
-                    `🔧 *Servicio:* ${servicio}\n` +
-                    `💬 *Mensaje:* ${mensaje}`;
+      const texto =
+        '🏍️ *Nuevo mensaje - Wuero-Motos*\n\n' +
+        '👤 *Nombre:* ' + nombre + '\n' +
+        '📞 *Teléfono:* ' + telefono + '\n' +
+        '✉️ *Correo:* ' + email + '\n' +
+        '🔧 *Servicio:* ' + servicio + '\n' +
+        '💬 *Mensaje:* ' + mensaje;
 
-      const url = `https://wa.me/528311306063?text=${encodeURIComponent(texto)}`;
+      const url = 'https://wa.me/528311306063?text=' + encodeURIComponent(texto);
 
-      // --- LIMPIAR CAMPOS ---
       document.getElementById('nombre').value   = '';
       document.getElementById('telefono').value = '';
       document.getElementById('email').value    = '';
       document.getElementById('servicio').value = '';
       document.getElementById('mensaje').value  = '';
 
-      // --- MOSTRAR CONFIRMACIÓN ---
       const msg = document.getElementById('msg-exito');
       msg.style.display = 'block';
-      setTimeout(() => { msg.style.display = 'none'; }, 4000);
 
-      // --- ABRIR WHATSAPP ---
-      window.open(url, '_blank');
+      setTimeout(function() {
+        msg.style.display = 'none';
+        window.location.href = url;
+      }, 800);
     }
   </script>
 
 </body>
 </html>
+s
