@@ -122,21 +122,58 @@
   <!-- SCRIPT -->
   <script>
     function enviarFormulario() {
-      // Limpiar todos los campos
-      document.getElementById('nombre').value = '';
-      document.getElementById('telefono').value = '';
-      document.getElementById('email').value = '';
-      document.getElementById('servicio').value = '';
-      document.getElementById('mensaje').value = '';
+      const nombre   = document.getElementById('nombre').value.trim();
+      const telefono = document.getElementById('telefono').value.trim();
+      const email    = document.getElementById('email').value.trim();
+      const servicio = document.getElementById('servicio').value;
+      const mensaje  = document.getElementById('mensaje').value.trim();
 
-      // Mostrar mensaje de éxito
+      // --- VALIDACIONES ---
+      if (!nombre) {
+        alert('⚠️ Por favor ingresa tu nombre.');
+        return;
+      }
+      if (!telefono || !/^\d{7,15}$/.test(telefono.replace(/\s|-/g, ''))) {
+        alert('⚠️ Ingresa un número de teléfono válido (solo dígitos, 7-15 caracteres).');
+        return;
+      }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        alert('⚠️ Ingresa un correo electrónico válido.');
+        return;
+      }
+      if (!servicio) {
+        alert('⚠️ Selecciona el servicio de tu interés.');
+        return;
+      }
+      if (!mensaje) {
+        alert('⚠️ Escribe un mensaje antes de enviar.');
+        return;
+      }
+
+      // --- ARMAR MENSAJE DE WHATSAPP ---
+      const texto = `🏍️ *Nuevo mensaje desde Wuero-Motos*\n\n` +
+                    `👤 *Nombre:* ${nombre}\n` +
+                    `📞 *Teléfono:* ${telefono}\n` +
+                    `✉️ *Correo:* ${email}\n` +
+                    `🔧 *Servicio:* ${servicio}\n` +
+                    `💬 *Mensaje:* ${mensaje}`;
+
+      const url = `https://wa.me/528311306063?text=${encodeURIComponent(texto)}`;
+
+      // --- LIMPIAR CAMPOS ---
+      document.getElementById('nombre').value   = '';
+      document.getElementById('telefono').value = '';
+      document.getElementById('email').value    = '';
+      document.getElementById('servicio').value = '';
+      document.getElementById('mensaje').value  = '';
+
+      // --- MOSTRAR CONFIRMACIÓN ---
       const msg = document.getElementById('msg-exito');
       msg.style.display = 'block';
+      setTimeout(() => { msg.style.display = 'none'; }, 4000);
 
-      // Ocultar el mensaje después de 4 segundos
-      setTimeout(function() {
-        msg.style.display = 'none';
-      }, 4000);
+      // --- ABRIR WHATSAPP ---
+      window.open(url, '_blank');
     }
   </script>
 
